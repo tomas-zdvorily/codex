@@ -1,46 +1,37 @@
-# Stylová česká předpověď počasí
+# Stylová česká předpověď počasí (HTML + PHP)
 
-Konzolová aplikace, která zobrazuje aktuální počasí a krátkodobou předpověď pro libovolné město v České republice. Data pocházejí z [Open-Meteo](https://open-meteo.com/), což je zcela zdarma a nevyžaduje registraci.
+Jednoduchá webová stránka v PHP, která zobrazuje aktuální počasí a krátkodobou předpověď pro vybraná města v České republice. Data získává z bezplatného rozhraní [Open-Meteo](https://open-meteo.com/) a výsledky prezentuje v moderním, responzivním designu.
 
-## Jak to funguje
-- Zadané město se nejprve převede na přesné souřadnice pomocí Open-Meteo Geocoding API.
-- Následně se stáhne aktuální stav, pět dní dopředu a detailní hodinová předpověď.
-- Výstup je hezky formátovaný pomocí rámečků, emotikon a zvýraznění, aby byl přehledný a "cool".
+## Funkce
+- Aktuální stav včetně teploty, rychlosti a směru větru.
+- Hodinová předpověď na dalších 12 hodin.
+- Denní výhled na tři dny dopředu.
+- Výběr z několika českých měst a možnost přepnutí jazyka rozhraní mezi češtinou a angličtinou.
+- Přehledné, „cool“ rozhraní s vlastní grafikou.
 
 ## Požadavky
-- Python 3.11+
-- Připojení k internetu (pro stažení dat z API)
+- PHP 8.1+
+- Připojení k internetu (pro stažení dat z Open-Meteo)
 
-## Instalace a spuštění
-```
-python -m weather.cli Praha
-```
-Nebo například:
-```
-python -m weather.cli Brno --hours 6
-```
-Výchozí jazyk je čeština, ale můžete použít i například `--language en`.
+## Lokální spuštění
+1. Naklonujte repozitář a přejděte do jeho složky.
+2. Spusťte vestavěný PHP server:
+   ```bash
+   php -S localhost:8000
+   ```
+3. Otevřete prohlížeč na adrese [http://localhost:8000](http://localhost:8000) a vyberte požadované město.
 
-## Ukázka výstupu
+Pokud se nepodaří stáhnout data (např. kvůli omezenému přístupu k internetu v prostředí), aplikace na stránce zobrazí přehlednou chybovou zprávu.
+
+## Struktura projektu
 ```
-╔════════════════════════╗
-║ Praha — stylová meteo ║
-╚════════════════════════╝
-
-╔═══════════════╗
-║ Aktuální stav ║
-╚═══════════════╝
-☀️ Jasno
-Teplota: 24.1 °C
-Vítr: 11.0 km/h
-Aktualizováno: 14.07.2024 15:00
-
-╔═══════════════╗
-║ Denní přehled ║
-╚═══════════════╝
-• Sobota 14.07: 16–27 °C, pravděpodobnost srážek 15%
-...
+index.php           # Hlavní stránka s logikou volání API a vykreslením HTML
+assets/styles.css   # Stylování rozhraní ve stylu moderní „glassmorphism“ karty
 ```
 
-## Poznámka k API
-Open-Meteo omezuje pouze rychlost dotazů. Proto je aplikace vhodná pro osobní použití a nenáročné skripty.
+## Přizpůsobení
+- V souboru `index.php` můžete rozšířit seznam měst (pole `$cities`).
+- Pro změnu vzhledu upravte `assets/styles.css`.
+
+## Licence dat
+Data poskytuje Open-Meteo zdarma pro nekomerční použití. Dbejte na jejich [podmínky používání](https://open-meteo.com/en/features).

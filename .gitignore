@@ -1,2 +1,6 @@
-__pycache__/
-*.pyc
+/vendor/
+/node_modules/
+/.idea/
+/.vscode/
+*.log
+.DS_Store
